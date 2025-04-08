@@ -1,4 +1,4 @@
-import { AboutusSection, HeroSection, ServicesSection } from "@/components";
+import { AboutusSection, HeroSection, QnaSection, ServicesSection, Footer } from "@/components";
 
 
 export default function Home() {
@@ -10,6 +10,8 @@ export default function Home() {
       <section className="w-full bg-transparent min-h-screen z-30 pointer-events-none"></section>
       <ServicesSection />
       <AboutusSection />
+      <QnaSection />
+      <Footer />
     </div>
   )
 }
