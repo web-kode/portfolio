@@ -321,9 +321,24 @@ export default function AboutusSection() {
                         <div className="bg-opacity-90 pb-11 text-center w-full z-20">
                             <h1 className="text-3xl heading-with-border font-bold logo text-gray-900 dark:text-[#f4f4f4]">About US</h1>
                         </div>
+                        <div className="block lg:hidden">
+                            <motion.div
+                                className="md:w-1/2 flex justify-center"
+                                initial={{ opacity: 0, x: 50 }}
+                                whileInView={{ opacity: 1, x: 0 }}
+                                transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+                                viewport={{ once: false }}
+                            >
+                                <img
+                                    src="/aboutus.svg"
+                                    alt="About Us Illustration"
+                                    className="w-full max-w-md md:max-w-lg"
+                                />
+                            </motion.div>
+                        </div>
 
                         {[
-                            "At [Your Company Name], we believe in innovation, quality, and a customer-first approach. Our team is dedicated to delivering top-notch solutions that not only meet industry standards but also redefine them.",
+                            "At Webkode, we believe in innovation, quality, and a customer-first approach. Our team is dedicated to delivering top-notch solutions that not only meet industry standards but also redefine them.",
                             "With years of expertise, we craft cutting-edge products and services that help businesses thrive in a competitive digital landscape. Whether it’s custom development, strategic consulting, or technology-driven solutions, we empower brands to achieve their full potential.",
                             "We are not just a company; we are a partner in your success, ensuring that every project we undertake is driven by passion, precision, and purpose. Let’s build the future, together."
                         ].map((text, i) => (
@@ -343,19 +358,21 @@ export default function AboutusSection() {
                     </div>
                 </div>
 
-                <motion.div
-                    className="md:w-1/2 flex justify-center"
-                    initial={{ opacity: 0, x: 50 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
-                    viewport={{ once: false }}
-                >
-                    <img
-                        src="/aboutus.svg"
-                        alt="About Us Illustration"
-                        className="w-full max-w-md md:max-w-lg"
-                    />
-                </motion.div>
+                <div className="hidden lg:block md:w-1/2">
+                    <motion.div
+                        className="w-full flex justify-center"
+                        initial={{ opacity: 0, x: 50 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+                        viewport={{ once: false }}
+                    >
+                        <img
+                            src="/aboutus.svg"
+                            alt="About Us Illustration"
+                            className="w-full max-w-md md:max-w-lg"
+                        />
+                    </motion.div>
+                </div>
             </div>
 
             <div className="max-w-6xl mx-auto px-4">
@@ -366,7 +383,122 @@ export default function AboutusSection() {
                     </p>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 auto-rows-[minmax(180px,_auto)] gap-6">
+                {/* ✅ Large screens (grid layout) */}
+                <div className="hidden lg:grid grid-cols-3 gap-6">
+                    {featuresData.map((feature, index) => (
+                        <motion.div
+                            key={index}
+                            className={`relative p-6 rounded-2xl shadow-md bg-white dark:bg-gradient-to-br dark:from-gray-900 dark:via-gray-800 dark:to-gray-700 transition-transform duration-300 ${feature.className}`}
+                            initial={{ opacity: 0, y: -40 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            transition={{
+                                duration: 0.6,
+                                ease: "easeInOut",
+                                delay: index * 0.08
+                            }}
+                            viewport={{ once: false, amount: 0.3 }}
+                        >
+                            <div className="relative z-10 space-y-4">
+                                <motion.div
+                                    whileHover={{ scale: 1.08, rotate: 2 }}
+                                    initial={{ scale: 0.95, opacity: 0 }}
+                                    whileInView={{ scale: 1, opacity: 1 }}
+                                    transition={{ duration: 0.4, ease: "easeOut" }}
+                                    className="w-12 h-12 flex items-center justify-center rounded-xl bg-indigo-100 dark:bg-indigo-900 text-indigo-600 dark:text-indigo-300 mb-3"
+                                >
+                                    {feature.icon}
+                                </motion.div>
+
+                                <h3 className="text-xl font-semibold text-gray-800 dark:text-white mb-2">
+                                    {feature.title}
+                                </h3>
+
+                                <p className="text-gray-600 dark:text-gray-300 text-sm">
+                                    {feature.text}
+                                </p>
+
+                                {feature.isLarge && feature.extraContent && (
+                                    <div className="mt-3 space-y-3">
+                                        {feature.extraContent.map((section, i) => (
+                                            <div
+                                                key={i}
+                                                className="transition duration-300 hover:bg-gray-100 dark:hover:bg-gray-700/40 p-2 rounded-md"
+                                            >
+                                                <h4 className="font-medium text-indigo-600 dark:text-indigo-300 mb-1 text-xs tracking-wide uppercase">
+                                                    {section.heading}
+                                                </h4>
+                                                <ul className="list-disc list-inside space-y-1 text-gray-600 dark:text-gray-300 text-xs leading-snug">
+                                                    {section.items.map((item, j) => (
+                                                        <li key={j}>{item}</li>
+                                                    ))}
+                                                </ul>
+                                            </div>
+                                        ))}
+                                    </div>
+                                )}
+                            </div>
+                        </motion.div>
+                    ))}
+                </div>
+                {/* ✅ Mobile + Tablet (stacked) */}
+                <div className="flex flex-col gap-6 lg:hidden">
+                    {featuresData.map((feature, index) => (
+                        <motion.div
+                            key={index}
+                            className={`relative p-6 rounded-2xl shadow-md bg-white dark:bg-gradient-to-br dark:from-gray-900 dark:via-gray-800 dark:to-gray-700 transition-transform duration-300 ${feature.className}`}
+                            initial={{ opacity: 0, y: -40 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            transition={{
+                                duration: 0.6,
+                                ease: "easeInOut",
+                                delay: index * 0.08
+                            }}
+                            viewport={{ once: false, amount: 0.3 }}
+                        >
+                            <div className="relative z-10 space-y-4">
+                                <motion.div
+                                    whileHover={{ scale: 1.08, rotate: 2 }}
+                                    initial={{ scale: 0.95, opacity: 0 }}
+                                    whileInView={{ scale: 1, opacity: 1 }}
+                                    transition={{ duration: 0.4, ease: "easeOut" }}
+                                    className="w-12 h-12 flex items-center justify-center rounded-xl bg-indigo-100 dark:bg-indigo-900 text-indigo-600 dark:text-indigo-300 mb-3"
+                                >
+                                    {feature.icon}
+                                </motion.div>
+
+                                <h3 className="text-xl font-semibold text-gray-800 dark:text-white mb-2">
+                                    {feature.title}
+                                </h3>
+
+                                <p className="text-gray-600 dark:text-gray-300 text-sm">
+                                    {feature.text}
+                                </p>
+
+                                {feature.isLarge && feature.extraContent && (
+                                    <div className="mt-3 space-y-3">
+                                        {feature.extraContent.map((section, i) => (
+                                            <div
+                                                key={i}
+                                                className="transition duration-300 hover:bg-gray-100 dark:hover:bg-gray-700/40 p-2 rounded-md"
+                                            >
+                                                <h4 className="font-medium text-indigo-600 dark:text-indigo-300 mb-1 text-xs tracking-wide uppercase">
+                                                    {section.heading}
+                                                </h4>
+                                                <ul className="list-disc list-inside space-y-1 text-gray-600 dark:text-gray-300 text-xs leading-snug">
+                                                    {section.items.map((item, j) => (
+                                                        <li key={j}>{item}</li>
+                                                    ))}
+                                                </ul>
+                                            </div>
+                                        ))}
+                                    </div>
+                                )}
+                            </div>
+                        </motion.div>
+                    ))}
+                </div>
+
+                {/* <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {featuresData.map((feature, index) => (
                         <motion.div
                             key={index}
@@ -421,7 +553,7 @@ export default function AboutusSection() {
                             </div>
                         </motion.div>
                     ))}
-                </div>
+                </div> */}
             </div>
         </div>
     );

@@ -102,19 +102,21 @@ export default function QnaSection() {
             <div className="max-w-7xl mx-auto px-4 md:px-8 grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
 
                 {/* Illustration with slide-in animation */}
-                <motion.div
-                    initial={{ x: -60, opacity: 0 }}
-                    whileInView={{ x: 0, opacity: 1 }}
-                    transition={{ duration: 0.6, ease: "easeOut" }}
-                    viewport={{ once: false, amount: 0.3 }}
-                    className="flex justify-center"
-                >
-                    <img
-                        src="/faq.svg"
-                        alt="FAQ Illustration"
-                        className="w-full max-w-md"
-                    />
-                </motion.div>
+                <div className="hidden lg:block">
+                    <motion.div
+                        initial={{ x: -60, opacity: 0 }}
+                        whileInView={{ x: 0, opacity: 1 }}
+                        transition={{ duration: 0.6, ease: "easeOut" }}
+                        viewport={{ once: false, amount: 0.3 }}
+                        className="flex justify-center"
+                    >
+                        <img
+                            src="/faq.svg"
+                            alt="FAQ Illustration"
+                            className="w-full max-w-md"
+                        />
+                    </motion.div>
+                </div>
 
                 {/* FAQ Content */}
                 <div>
@@ -122,6 +124,21 @@ export default function QnaSection() {
                         <h1 className="text-3xl heading-with-border logo text-gray-900 dark:text-[#f4f4f4]">
                             Frequently Asked Questions
                         </h1>
+                    </div>
+                    <div className="block lg:hidden">
+                        <motion.div
+                            initial={{ x: -60, opacity: 0 }}
+                            whileInView={{ x: 0, opacity: 1 }}
+                            transition={{ duration: 0.6, ease: "easeOut" }}
+                            viewport={{ once: false, amount: 0.3 }}
+                            className="flex justify-center"
+                        >
+                            <img
+                                src="/faq.svg"
+                                alt="FAQ Illustration"
+                                className="w-full max-w-md"
+                            />
+                        </motion.div>
                     </div>
                     <div className="space-y-5">
                         <div className="space-y-4">
@@ -147,11 +164,14 @@ export default function QnaSection() {
                                                 }`}
                                         />
                                     </button>
-                                    {activeIndex === index && (
-                                        <div className="px-5 py-4 text-sm text-gray-700 dark:text-gray-300 bg-white dark:bg-[#1c1c2c]">
+                                    <div
+                                        className={`px-5 overflow-hidden transition-all duration-300 ease-in-out text-sm text-gray-700 dark:text-gray-300 bg-white dark:bg-[#1c1c2c] ${activeIndex === index ? 'max-h-[500px] py-4' : 'max-h-0 py-0'
+                                            }`}
+                                    >
+                                        <div className="overflow-hidden">
                                             {faq.answer}
                                         </div>
-                                    )}
+                                    </div>
                                 </motion.div>
                             ))}
                         </div>

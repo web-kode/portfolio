@@ -1,17 +1,46 @@
-import { AboutusSection, HeroSection, QnaSection, ServicesSection, Footer } from "@/components";
+// import { AboutusSection, Footer, HeroSection, QnaSection, ServicesSection } from "@/components";
 
+
+// export default function Home() {
+//   return (
+//     <>
+//       <HeroSection />
+//       <ServicesSection />
+//       <AboutusSection />
+//       <QnaSection />
+//       <Footer />
+//     </>
+//   )
+// }
+
+import {
+  AboutusSection,
+  Footer,
+  HeroSection,
+  QnaSection,
+  ServicesSection,
+} from "@/components";
 
 export default function Home() {
   return (
-    <div className="flex flex-col w-full h-auto">
-      <div className="fixed top-0 left-0 w-full h-screen">
+    <>
+      {/* Fixed Hero in background */}
+      <div className="fixed top-0 left-0 w-full h-screen -z-10">
         <HeroSection />
       </div>
-      <section className="w-full bg-transparent min-h-screen z-30 pointer-events-none"></section>
-      <ServicesSection />
-      <AboutusSection />
-      <QnaSection />
-      <Footer />
-    </div>
-  )
+
+      {/* Spacer to take up Hero's space in scroll */}
+      <div className="lg:h-screen h-[70vh]" />
+
+      {/* Scrollable content */}
+      <div className="relative z-10">
+        <ServicesSection />
+        <AboutusSection />
+        <QnaSection />
+        <Footer />
+      </div>
+    </>
+  );
 }
+
+
